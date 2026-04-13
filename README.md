@@ -3,6 +3,8 @@
 > **TenTwenty Frontend Developer Assessment 2025**
 > Built by **Abubakar Saddiq**
 
+**Live Demo:** [https://tentwenty-assessment-app.vercel.app](https://tentwenty-assessment-app.vercel.app)
+
 ---
 
 ## Overview
