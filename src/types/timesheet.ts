@@ -45,8 +45,8 @@ export interface UpdateTimesheetPayload extends Partial<CreateTimesheetPayload> 
 export interface TimesheetFormValues {
   project: string;
   typeOfWork: string;
-  taskDescription: string;
-  hours: number;
+  taskDescription: string | undefined;
+  hours: number | undefined;
 }
 
 export interface Task {
@@ -62,7 +62,7 @@ export interface Task {
 export interface TaskFormValues {
   project: string;
   typeOfWork: string;
-  taskDescription: string;
-  hours: number;
+  taskDescription: string | undefined;
+  hours: number | undefined;
 }
 

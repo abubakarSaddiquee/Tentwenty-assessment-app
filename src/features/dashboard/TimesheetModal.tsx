@@ -13,13 +13,14 @@ import type { Timesheet, TimesheetFormValues } from "@/types/timesheet";
 const schema = yup.object({
   project: yup.string().required("Project is required"),
   typeOfWork: yup.string().required("Type of work is required"),
-  taskDescription: yup.string().required("Task description is required"),
+  taskDescription: yup.string().optional(),
   hours: yup
     .number()
+    .transform((value) => (isNaN(value) ? undefined : value))
     .typeError("Hours must be a number")
-    .min(1, "Hours must be at least 1")
+    .min(0, "Hours cannot be negative")
     .max(80, "Hours cannot exceed 80")
-    .required("Hours is required"),
+    .optional(),
 });
 
 interface TimesheetModalProps {
@@ -47,8 +48,9 @@ export default function TimesheetModal({
     watch,
     formState: { errors },
   } = useForm<TimesheetFormValues>({
-    resolver: yupResolver(schema),
-    defaultValues: { project: "", typeOfWork: "", taskDescription: "", hours: 8 },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    resolver: yupResolver(schema) as any,
+    defaultValues: { project: "", typeOfWork: "", taskDescription: "", hours: 0 },
   });
 
   const hours = watch("hours");
@@ -59,10 +61,10 @@ export default function TimesheetModal({
         project: editingTimesheet.project || "",
         typeOfWork: editingTimesheet.typeOfWork || "",
         taskDescription: editingTimesheet.taskDescription || "",
-        hours: editingTimesheet.hours || 8,
+        hours: editingTimesheet.hours ?? 0,
       });
     } else {
-      reset({ project: "", typeOfWork: "", taskDescription: "", hours: 8 });
+      reset({ project: "", typeOfWork: "", taskDescription: "", hours: 0 });
     }
   }, [editingTimesheet, reset]);
 
@@ -116,7 +118,7 @@ export default function TimesheetModal({
 
         <div className="flex flex-col gap-1.5">
           <label className="text-sm font-medium text-[var(--color-text-secondary)]">
-            Task description <span className="text-[var(--color-danger)]">*</span>
+            Task description
           </label>
           <textarea
             rows={4}
@@ -129,12 +131,12 @@ export default function TimesheetModal({
 
         <div className="flex flex-col gap-1.5">
           <label className="text-sm font-medium text-[var(--color-text-secondary)]">
-            Hours <span className="text-[var(--color-danger)]">*</span>
+            Hours
           </label>
           <div className="flex items-center gap-0 w-28">
             <button
               type="button"
-              onClick={() => setValue("hours", Math.max(1, (hours || 1) - 1))}
+              onClick={() => setValue("hours", Math.max(0, (hours ?? 0) - 1))}
               className="w-9 h-9 flex items-center justify-center border border-[var(--color-border)] rounded-l-lg bg-[var(--color-surface)] hover:bg-[var(--color-background)] text-[var(--color-text-primary)] text-lg font-medium transition-colors"
             >
               −
@@ -146,7 +148,7 @@ export default function TimesheetModal({
             />
             <button
               type="button"
-              onClick={() => setValue("hours", Math.min(80, (hours || 0) + 1))}
+              onClick={() => setValue("hours", Math.min(40, (hours || 0) + 1))}
               className="w-9 h-9 flex items-center justify-center border border-[var(--color-border)] rounded-r-lg bg-[var(--color-surface)] hover:bg-[var(--color-background)] text-[var(--color-text-primary)] text-lg font-medium transition-colors"
             >
               +

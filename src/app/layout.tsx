@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ReduxProvider } from "@/store/provider";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -23,7 +24,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full" suppressHydrationWarning>
       <body className={`${inter.variable} min-h-full antialiased`} style={{ fontFamily: "var(--font-inter), Inter, sans-serif" }} suppressHydrationWarning>
-        <ReduxProvider>{children}</ReduxProvider>
+        <ReduxProvider>
+          <Toaster position="top-center" />
+          {children}
+        </ReduxProvider>
       </body>
     </html>
   );

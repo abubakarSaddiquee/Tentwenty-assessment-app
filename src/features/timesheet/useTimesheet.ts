@@ -2,6 +2,7 @@
 
 import { useMemo, useState, useCallback } from "react";
 import { useParams } from "next/navigation";
+import { toast } from "react-hot-toast";
 import { useGetTimesheetByIdQuery } from "@/services/timesheetApi";
 import {
   useGetTasksByTimesheetIdQuery,
@@ -75,24 +76,46 @@ export function useTimesheetDetail() {
   }, []);
 
   const handleSubmit = useCallback(async (values: TaskFormValues) => {
-    if (editingTask) {
-      await updateTask({
-        timesheetId,
-        taskId: editingTask.id,
-        ...values,
-      });
-    } else {
-      await createTask({
-        timesheetId,
-        date: selectedDate,
-        ...values,
-      });
+    try {
+      if (editingTask) {
+        await updateTask({
+          timesheetId,
+          taskId: editingTask.id,
+          project: values.project,
+          typeOfWork: values.typeOfWork,
+          taskDescription: values.taskDescription ?? "",
+          hours: values.hours ?? 0,
+        }).unwrap();
+
+        toast.success("Task updated successfully");
+      } else {
+        await createTask({
+          timesheetId,
+          date: selectedDate,
+          project: values.project,
+          typeOfWork: values.typeOfWork,
+          taskDescription: values.taskDescription ?? "",
+          hours: values.hours ?? 0,
+        }).unwrap();
+
+        toast.success("Task added successfully");
+      }
+
+      closeModal();
+    } catch (error) {
+      toast.error("Unable to save task. Please try again.");
+      throw error;
     }
-    closeModal();
   }, [editingTask, timesheetId, selectedDate, createTask, updateTask, closeModal]);
 
   const handleDelete = useCallback(async (taskId: string) => {
-    await deleteTask({ timesheetId, taskId });
+    try {
+      await deleteTask({ timesheetId, taskId }).unwrap();
+      toast.success("Task deleted successfully");
+    } catch (error) {
+      toast.error("Unable to delete task. Please try again.");
+      throw error;
+    }
   }, [timesheetId, deleteTask]);
 
   return {

@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useRouter } from "next/navigation";
+import { toast } from "react-hot-toast";
 import {
   useGetTimesheetsQuery,
   useCreateTimesheetMutation,
@@ -43,7 +44,7 @@ export function useDashboard() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isDatePickerOpen]);
 
-  const { data, isLoading, isError, isFetching } = useGetTimesheetsQuery({
+  const { data, isLoading, isError, isFetching, refetch } = useGetTimesheetsQuery({
     page,
     limit,
     status: statusFilter || undefined,
@@ -114,22 +115,34 @@ export function useDashboard() {
   }, [router, openEditModal, openAddModal]);
 
   const handleSubmit = useCallback(async (values: TimesheetFormValues) => {
-    const status = getStatus(values.hours);
-    if (editingTimesheet) {
-      await updateTimesheet({ id: editingTimesheet.id, ...values, status });
-    } else {
-      const today = new Date();
-      const end = new Date(today);
-      end.setDate(today.getDate() + 4);
-      await createTimesheet({
-        ...values,
-        status,
-        startDate: today.toISOString().split("T")[0],
-        endDate: end.toISOString().split("T")[0],
-      });
+    const status = getStatus(values.hours ?? 0);
+
+    try {
+      if (editingTimesheet) {
+        await updateTimesheet({ id: editingTimesheet.id, ...values, status }).unwrap();
+        toast.success("Entry updated successfully");
+      } else {
+        const today = new Date();
+        const end = new Date(today);
+        end.setDate(today.getDate() + 4);
+        await createTimesheet({
+          project: values.project,
+          typeOfWork: values.typeOfWork,
+          taskDescription: values.taskDescription ?? "",
+          hours: values.hours ?? 0,
+          status,
+          startDate: today.toISOString().split("T")[0],
+          endDate: end.toISOString().split("T")[0],
+        }).unwrap();
+        toast.success("Entry added successfully");
+      }
+      refetch();
+      closeModal();
+    } catch (error) {
+      toast.error("Unable to save entry. Please try again.");
+      throw error;
     }
-    closeModal();
-  }, [editingTimesheet, updateTimesheet, createTimesheet, closeModal]);
+  }, [editingTimesheet, updateTimesheet, createTimesheet, refetch, closeModal]);
 
   return {
     timesheets: data?.data ?? [],
