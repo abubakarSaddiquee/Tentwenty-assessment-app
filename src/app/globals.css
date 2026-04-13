@@ -1,0 +1,95 @@
+@import "tailwindcss";
+
+/*
+  Design tokens — single source of truth is src/theme/colors.ts & typography.ts
+  CSS variables below mirror those values so Tailwind + inline styles both work.
+*/
+@theme inline {
+  /* Primary — theme.colors.primary */
+  --color-primary: #2563EB;
+  --color-primary-hover: #1D4ED8;
+  --color-primary-light: #EFF6FF;
+
+  /* Danger — theme.colors.danger */
+  --color-danger: #EF4444;
+  --color-danger-hover: #DC2626;
+  --color-danger-bg: #FEE2E2;
+
+  /* Warning — theme.colors.warning */
+  --color-warning: #D97706;
+  --color-warning-hover: #B45309;
+
+  /* Status — theme.colors.completed / incomplete / missing */
+  --color-completed-bg: #D1FAE5;
+  --color-completed-text: #065F46;
+  --color-incomplete-bg: #FEF3C7;
+  --color-incomplete-text: #92400E;
+  --color-missing-bg: #FEE2E2;
+  --color-missing-text: #991B1B;
+
+  /* UI — theme.colors.background / surface / border etc. */
+  --color-background: #F9FAFB;
+  --color-surface: #FFFFFF;
+  --color-surface-alt: #F8F9FB;
+  --color-surface-soft: rgba(255,255,255,0.8);
+  --color-divider: #F3F4F6;
+  --color-overlay: rgba(30,41,59,0.6);
+  --color-border: #E5E7EB;
+
+  /* Text — theme.colors.textPrimary / textSecondary / textMuted */
+  --color-text-primary: #111827;
+  --color-text-secondary: #6B7280;
+  --color-text-muted: #9CA3AF;
+
+  /* Hero — theme.colors.hero */
+  --color-hero: #2563EB;
+  --color-hero-text: #FFFFFF;
+
+  /* Font — theme.typography.fontFamily */
+  --font-sans: var(--font-inter), 'Inter', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+}
+
+.bg-surface { background-color: var(--color-surface); }
+.bg-surface-alt { background-color: var(--color-surface-alt); }
+.bg-background { background-color: var(--color-background); }
+.bg-primary { background-color: var(--color-primary); }
+.bg-primary-light { background-color: var(--color-primary-light); }
+.bg-completed { background-color: var(--color-completed-bg); }
+.bg-incomplete { background-color: var(--color-incomplete-bg); }
+.bg-missing { background-color: var(--color-missing-bg); }
+.bg-danger { background-color: var(--color-danger); }
+.bg-danger-soft { background-color: var(--color-danger-bg); }
+.bg-overlay { background-color: var(--color-overlay); }
+
+.text-primary { color: var(--color-text-primary); }
+.text-secondary { color: var(--color-text-secondary); }
+.text-muted { color: var(--color-text-muted); }
+.text-surface { color: var(--color-surface); }
+.text-surface-soft { color: var(--color-surface-soft); }
+.text-completed { color: var(--color-completed-text); }
+.text-incomplete { color: var(--color-incomplete-text); }
+.text-missing { color: var(--color-missing-text); }
+.text-danger { color: var(--color-danger); }
+.text-warning { color: var(--color-warning); }
+
+.border-default { border-color: var(--color-border); }
+.border-navbar { border-color: var(--color-border); }
+
+.hover\:bg-primary-hover:hover { background-color: var(--color-primary-hover); }
+.hover\:text-primary-hover:hover { color: var(--color-primary-hover); }
+.hover\:text-warning-hover:hover { color: var(--color-warning-hover); }
+.hover\:bg-background:hover { background-color: var(--color-background); }
+.hover\:bg-surface:hover { background-color: var(--color-surface); }
+
+.focus\:ring-primary:focus { box-shadow: 0 0 0 2px rgba(37,99,235,0.35); }
+.focus\:ring-danger:focus { box-shadow: 0 0 0 2px rgba(239,68,68,0.35); }
