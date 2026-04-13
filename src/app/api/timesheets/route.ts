@@ -17,7 +17,6 @@ export async function GET(request: NextRequest) {
     filtered = filtered.filter((t) => t.status === (status as TimesheetStatus));
   }
 
-  // Overlap check: timesheet overlaps selected range if it starts before range ends AND ends after range starts
   if (startDate && endDate) {
     filtered = filtered.filter((t) => t.startDate <= endDate && t.endDate >= startDate);
   } else if (startDate) {

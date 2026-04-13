@@ -19,24 +19,20 @@ function getStatus(hours: number): TimesheetStatus {
 export function useDashboard() {
   const router = useRouter();
 
-  // Pagination & filters
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(5);
   const [statusFilter, setStatusFilter] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
 
-  // Modal state
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingTimesheet, setEditingTimesheet] = useState<Timesheet | null>(null);
 
-  // Date picker state
   const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
   const [localStart, setLocalStart] = useState(startDate);
   const [localEnd, setLocalEnd] = useState(endDate);
   const pickerRef = useRef<HTMLDivElement>(null);
 
-  // Close date picker on outside click
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
       if (pickerRef.current && !pickerRef.current.contains(e.target as Node)) {
@@ -58,7 +54,6 @@ export function useDashboard() {
   const [createTimesheet, { isLoading: isCreating }] = useCreateTimesheetMutation();
   const [updateTimesheet, { isLoading: isUpdating }] = useUpdateTimesheetMutation();
 
-  // Date picker actions
   const openPicker = useCallback(() => {
     setLocalStart(startDate);
     setLocalEnd(endDate);
@@ -84,7 +79,6 @@ export function useDashboard() {
     setPage(1);
   }, [clearDateRange]);
 
-  // Derived date display values
   const hasDateFilter = !!(startDate || endDate);
   const dateRangeLabel = startDate && endDate
     ? `${formatSingleDate(startDate)} — ${formatSingleDate(endDate)}`
@@ -94,7 +88,6 @@ export function useDashboard() {
     ? `To ${formatSingleDate(endDate)}`
     : "Date Range";
 
-  // Modal actions
   const openAddModal = useCallback(() => {
     setEditingTimesheet(null);
     setIsModalOpen(true);
@@ -110,7 +103,6 @@ export function useDashboard() {
     setEditingTimesheet(null);
   }, []);
 
-  // Table action handler
   const handleActionClick = useCallback((ts: Timesheet) => {
     if (ts.status === "COMPLETED") {
       router.push(`/dashboard/timesheet/${ts.id}`);
@@ -140,22 +132,18 @@ export function useDashboard() {
   }, [editingTimesheet, updateTimesheet, createTimesheet, closeModal]);
 
   return {
-    // Data
     timesheets: data?.data ?? [],
     total: data?.total ?? 0,
     totalPages: data?.totalPages ?? 1,
     isLoading,
     isError,
     isFetching,
-    // Pagination
     page,
     setPage,
     limit,
     setLimit,
-    // Status filter
     statusFilter,
     setStatusFilter,
-    // Date filter
     startDate,
     endDate,
     hasDateFilter,
@@ -171,7 +159,6 @@ export function useDashboard() {
     applyDateFilter,
     clearFilter,
     clearDateRange,
-    // Modal
     isModalOpen,
     editingTimesheet,
     isSubmitting: isCreating || isUpdating,
@@ -179,7 +166,6 @@ export function useDashboard() {
     openEditModal,
     closeModal,
     handleSubmit,
-    // Table
     handleActionClick,
   };
 }

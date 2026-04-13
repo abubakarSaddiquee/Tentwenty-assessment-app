@@ -46,7 +46,6 @@ export default function Dashboard() {
       <main className="max-w-[1100px] mx-auto px-3 sm:px-6 pt-6 sm:pt-8 pb-6">
         <div className="bg-[var(--color-surface)] rounded-2xl border border-[var(--color-border)] shadow-[0_1px_4px_rgba(0,0,0,0.06)]">
 
-          {/* Card Header */}
           <div className="px-4 sm:px-6 pt-5 sm:pt-6 pb-4 sm:pb-5 flex items-center justify-between gap-3">
             <h1 className="text-base sm:text-lg font-semibold text-[var(--color-text-primary)]">Your Timesheets</h1>
             <button
@@ -61,10 +60,8 @@ export default function Dashboard() {
             </button>
           </div>
 
-          {/* Filters */}
           <div className="px-4 sm:px-6 pb-4 flex flex-wrap gap-2">
 
-            {/* Date Range Picker */}
             <div className="relative w-full sm:w-auto" ref={pickerRef}>
               <button
                 type="button"
@@ -93,7 +90,6 @@ export default function Dashboard() {
 
               {isDatePickerOpen && (
                 <div className="absolute left-0 top-full z-30 mt-2 w-full sm:w-72 rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] shadow-xl overflow-hidden">
-                  {/* Picker header */}
                   <div className="px-4 py-3 bg-[var(--color-primary)] flex items-center justify-between">
                     <span className="text-sm font-semibold text-white">Select Date Range</span>
                     <button
@@ -106,7 +102,6 @@ export default function Dashboard() {
                   </div>
 
                   <div className="p-4 space-y-4">
-                    {/* From */}
                     <div>
                       <label className="flex items-center gap-1.5 text-xs font-semibold text-[var(--color-text-secondary)] uppercase tracking-wide mb-2">
                         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
@@ -121,7 +116,6 @@ export default function Dashboard() {
                       />
                     </div>
 
-                    {/* Divider with arrow */}
                     <div className="flex items-center gap-2">
                       <div className="flex-1 h-px bg-[var(--color-border)]" />
                       <div className="w-6 h-6 rounded-full bg-[var(--color-primary-light)] flex items-center justify-center shrink-0">
@@ -132,7 +126,6 @@ export default function Dashboard() {
                       <div className="flex-1 h-px bg-[var(--color-border)]" />
                     </div>
 
-                    {/* To */}
                     <div>
                       <label className="flex items-center gap-1.5 text-xs font-semibold text-[var(--color-text-secondary)] uppercase tracking-wide mb-2">
                         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
@@ -147,7 +140,6 @@ export default function Dashboard() {
                       />
                     </div>
 
-                    {/* Actions */}
                     <div className="flex gap-2 pt-1">
                       <button
                         type="button"
@@ -169,7 +161,6 @@ export default function Dashboard() {
               )}
             </div>
 
-            {/* Status Filter */}
             <div className="relative w-full sm:w-auto inline-flex items-center">
               <select
                 className={[

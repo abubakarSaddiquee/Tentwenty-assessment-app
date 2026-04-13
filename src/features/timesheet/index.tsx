@@ -38,7 +38,6 @@ export default function TimesheetDetail() {
     <main className="max-w-[1100px] mx-auto px-3 sm:px-6 pt-6 sm:pt-8 pb-6">
       <div className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)] shadow-sm overflow-hidden">
 
-        {/* Header */}
         <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between px-4 sm:px-6 pt-5 sm:pt-6 pb-4 sm:pb-5 border-b border-[var(--color-border)]">
           <div>
             <h1 className="text-base sm:text-lg font-semibold text-[var(--color-text-primary)]">This week's timesheet</h1>
@@ -58,7 +57,6 @@ export default function TimesheetDetail() {
           </div>
         </div>
 
-        {/* Task groups */}
         <div>
           {taskGroups.map((group, groupIndex) => (
             <div key={group.date} className={groupIndex !== 0 ? "border-t border-[var(--color-border)]" : ""}>
@@ -77,7 +75,6 @@ export default function TimesheetDetail() {
                     key={task.id}
                     className="flex items-center px-3 sm:px-6 py-3 border-b border-[var(--color-divider)] gap-2"
                   >
-                    {/* Date label */}
                     <div className="w-10 sm:w-14 shrink-0">
                       {taskIndex === 0 && (
                         <span className="text-xs sm:text-sm font-semibold text-[var(--color-text-primary)]">
@@ -86,17 +83,14 @@ export default function TimesheetDetail() {
                       )}
                     </div>
 
-                    {/* Task description */}
                     <span className="flex-1 text-xs sm:text-sm text-[var(--color-text-primary)] truncate">
                       {task.taskDescription}
                     </span>
 
-                    {/* Hours */}
                     <span className="shrink-0 text-xs sm:text-sm text-[var(--color-text-secondary)]">
                       {task.hours} hrs
                     </span>
 
-                    {/* Project badge */}
                     <span className="hidden xs:inline-flex sm:inline-flex shrink-0 items-center px-2 py-0.5 rounded-full border border-[var(--color-border)] bg-[var(--color-surface)] text-xs text-[var(--color-text-secondary)]">
                       {task.project}
                     </span>
@@ -109,7 +103,6 @@ export default function TimesheetDetail() {
                 ))
               )}
 
-              {/* Add new task */}
               <div className="flex items-center px-3 sm:px-6 py-2 gap-2">
                 <div className="w-10 sm:w-14 shrink-0" />
                 <button

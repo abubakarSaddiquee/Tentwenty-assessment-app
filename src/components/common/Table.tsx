@@ -101,7 +101,6 @@ export default function Table<T>({
 
   return (
     <div className={cn("overflow-hidden", wrapperClassName)}>
-      {/* Scrollable table wrapper */}
       <div className="overflow-x-auto">
         <table className={cn("w-full min-w-[480px] border-collapse", tableClassName)}>
           <thead>

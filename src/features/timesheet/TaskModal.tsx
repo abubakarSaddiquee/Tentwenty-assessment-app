@@ -92,7 +92,6 @@ export default function TaskModal({
       title={isEditing ? "Edit Task" : "Add New Task"}
     >
       <form onSubmit={handleSubmit(handleFormSubmit)} noValidate className="flex flex-col gap-4">
-        {/* Select Project */}
         <div className="flex flex-col gap-1.5">
           <label className="text-sm font-medium text-[var(--color-text-secondary)] flex items-center gap-1">
             Select Project
@@ -111,7 +110,6 @@ export default function TaskModal({
           {errors.project && <p className="text-xs text-[var(--color-danger)]">{errors.project.message}</p>}
         </div>
 
-        {/* Type of Work */}
         <div className="flex flex-col gap-1.5">
           <label className="text-sm font-medium text-[var(--color-text-secondary)] flex items-center gap-1">
             Type of Work
@@ -130,7 +128,6 @@ export default function TaskModal({
           {errors.typeOfWork && <p className="text-xs text-[var(--color-danger)]">{errors.typeOfWork.message}</p>}
         </div>
 
-        {/* Task Description */}
         <div className="flex flex-col gap-1.5">
           <label className="text-sm font-medium text-[var(--color-text-secondary)]">
             Task description <span className="text-[var(--color-danger)]">*</span>
@@ -144,7 +141,6 @@ export default function TaskModal({
           {errors.taskDescription && <p className="text-xs text-[var(--color-danger)]">{errors.taskDescription.message}</p>}
         </div>
 
-        {/* Hours */}
         <div className="flex flex-col gap-1.5">
           <label className="text-sm font-medium text-[var(--color-text-secondary)]">
             Hours <span className="text-[var(--color-danger)]">*</span>
@@ -173,7 +169,6 @@ export default function TaskModal({
           {errors.hours && <p className="text-xs text-[var(--color-danger)]">{errors.hours.message}</p>}
         </div>
 
-        {/* Actions */}
         <div className="flex flex-col sm:flex-row gap-2 pt-2">
           <Button type="submit" variant="primary" loading={isSubmitting} className="w-full sm:w-1/2">
             {isEditing ? "Save Changes" : "Add Task"}

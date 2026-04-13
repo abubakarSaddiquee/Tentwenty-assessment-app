@@ -36,10 +36,8 @@ export default function Modal({ isOpen, onClose, title, children, className }: M
       className="fixed inset-0 z-50 flex items-end sm:items-center justify-center"
       onClick={(e) => { if (e.target === overlayRef.current) onClose(); }}
     >
-      {/* Backdrop */}
       <div className="absolute inset-0 bg-[var(--color-overlay)]" />
 
-      {/* Modal */}
       <div
         className={cn(
           "relative bg-[var(--color-surface)] rounded-t-2xl sm:rounded-xl shadow-2xl w-full sm:max-w-md mx-4 sm:mx-3 z-10 max-h-[90vh] overflow-y-auto",
@@ -49,7 +47,6 @@ export default function Modal({ isOpen, onClose, title, children, className }: M
         aria-modal="true"
         aria-labelledby="modal-title"
       >
-        {/* Header */}
         <div className="flex items-center justify-between px-4 sm:px-6 py-4 sm:py-5 border-b border-[var(--color-border)] sticky top-0 bg-[var(--color-surface)] z-10">
           <h2 id="modal-title" className="text-base font-semibold text-[var(--color-text-primary)]">
             {title}
@@ -65,7 +62,6 @@ export default function Modal({ isOpen, onClose, title, children, className }: M
           </button>
         </div>
 
-        {/* Body */}
         <div className="px-4 sm:px-6 py-4 sm:py-5">
           {children}
         </div>
