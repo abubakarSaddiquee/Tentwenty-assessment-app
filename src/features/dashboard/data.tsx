@@ -13,20 +13,7 @@ export const STATUS_OPTIONS = [
 
 export const PAGE_SIZE_OPTIONS = [5, 10, 20, 50];
 
-export const PROJECT_OPTIONS = [
-  { value: "homepage", label: "Homepage Development" },
-  { value: "dashboard", label: "Dashboard Redesign" },
-  { value: "mobile", label: "Mobile App" },
-  { value: "api", label: "API Integration" },
-];
-
-export const TYPE_OF_WORK_OPTIONS = [
-  { value: "development", label: "Development" },
-  { value: "design", label: "Design" },
-  { value: "bug_fix", label: "Bug fixes" },
-  { value: "review", label: "Code Review" },
-  { value: "meeting", label: "Meeting" },
-];
+export { PROJECT_OPTIONS, TYPE_OF_WORK_OPTIONS } from "../timesheet/data";
 
 export const STATUS_ACTION_MAP: Record<TimesheetStatus, string> = {
   COMPLETED: "View",

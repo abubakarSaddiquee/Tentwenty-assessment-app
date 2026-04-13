@@ -7,22 +7,8 @@ import * as yup from "yup";
 import Modal from "@/components/common/Modal";
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
+import { PROJECT_OPTIONS, TYPE_OF_WORK_OPTIONS } from "./data";
 import type { TaskFormValues, Task } from "@/types/timesheet";
-
-const PROJECT_OPTIONS = [
-  { value: "homepage", label: "Homepage Development" },
-  { value: "dashboard", label: "Dashboard Redesign" },
-  { value: "mobile", label: "Mobile App" },
-  { value: "api", label: "API Integration" },
-];
-
-const TYPE_OF_WORK_OPTIONS = [
-  { value: "development", label: "Development" },
-  { value: "design", label: "Design" },
-  { value: "bug_fix", label: "Bug fixes" },
-  { value: "review", label: "Code Review" },
-  { value: "meeting", label: "Meeting" },
-];
 
 const schema = yup.object({
   project: yup.string().required("Project is required"),

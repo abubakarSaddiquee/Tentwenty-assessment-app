@@ -51,7 +51,7 @@ export default function TimesheetDetail() {
             <div className="h-2 rounded-full bg-[var(--color-background)] overflow-hidden">
               <div
                 className="h-full rounded-full"
-                style={{ width: `${progressValue}%`, backgroundColor: "#F97316" }}
+                style={{ width: `${progressValue}%`, backgroundColor: "var(--color-primary)" }}
               />
             </div>
           </div>

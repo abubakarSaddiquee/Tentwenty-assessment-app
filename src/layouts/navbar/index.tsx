@@ -2,14 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { signOut } from "next-auth/react";
-
-function ChevronDown({ size = 14 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="pointer-events-none flex-shrink-0">
-      <path d="M6 9l6 6 6-6" />
-    </svg>
-  );
-}
+import { ChevronDown } from "@/components/icons";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);

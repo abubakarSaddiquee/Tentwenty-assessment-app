@@ -158,7 +158,6 @@ export function useDashboard() {
     openPicker,
     applyDateFilter,
     clearFilter,
-    clearDateRange,
     isModalOpen,
     editingTimesheet,
     isSubmitting: isCreating || isUpdating,

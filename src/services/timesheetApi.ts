@@ -11,13 +11,13 @@ export const timesheetApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getTimesheets: builder.query<TimesheetListResponse, TimesheetQueryParams>({
       query: (params) => {
-        const searchParams = new URLSearchParams();
-        if (params?.page) searchParams.set("page", String(params.page));
-        if (params?.limit) searchParams.set("limit", String(params.limit));
-        if (params?.status) searchParams.set("status", params.status);
-        if (params?.startDate) searchParams.set("startDate", params.startDate);
-        if (params?.endDate) searchParams.set("endDate", params.endDate);
-        return `/timesheets?${searchParams.toString()}`;
+        const query: Record<string, string | number> = {};
+        if (params?.page) query.page = params.page;
+        if (params?.limit) query.limit = params.limit;
+        if (params?.status) query.status = params.status;
+        if (params?.startDate) query.startDate = params.startDate;
+        if (params?.endDate) query.endDate = params.endDate;
+        return { url: "/timesheets", params: query };
       },
       providesTags: ["Timesheet"],
     }),
